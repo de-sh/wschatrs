@@ -1,7 +1,7 @@
 use tungstenite::{connect, Message};
 use url::Url;
 
-fn main() {
+pub fn client() {
     env_logger::init();
 
     let (mut socket, response) =

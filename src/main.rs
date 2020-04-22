@@ -1,20 +1,12 @@
-use std::net::TcpListener;
-use std::thread::spawn;
-use tungstenite::server::accept;
+mod server;
+mod client;
 
 fn main() {
-    let server = TcpListener::bind("127.0.0.1:9001").unwrap();
-    for stream in server.incoming() {
-        spawn (move || {
-            let mut websocket = accept(stream.unwrap()).unwrap();
-            loop {
-                let msg = websocket.read_message().unwrap();
-
-                // We do not want to send back ping/pong messages.
-                if msg.is_binary() || msg.is_text() {
-                    websocket.write_message(msg).unwrap();
-                }
-            }
-        });
+    let line = String::new();
+    println!("Act as a client? [Y]/n: ");
+    match std::io::stdin().read_line(&mut line).unwrap() {
+        "Y" => client::client(),
+        "y" => client::client(),
+        _ => server::server()
     }
 }

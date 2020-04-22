@@ -4,7 +4,7 @@ use std::thread::spawn;
 use tungstenite::accept_hdr;
 use tungstenite::handshake::server::{Request, Response};
 
-fn main() {
+pub fn server() {
     env_logger::init();
     let server = TcpListener::bind("127.0.0.1:3012").unwrap();
     for stream in server.incoming() {
