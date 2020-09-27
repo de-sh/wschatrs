@@ -7,6 +7,7 @@ use tungstenite::handshake::server::{Request, Response};
 pub fn main() {
     env_logger::init();
     let server = TcpListener::bind("127.0.0.1:3012").expect("Can't connect");
+    println!("Server has been bound to port `3012`.");
     for stream in server.incoming() {
         spawn(move || {
             let callback = |req: &Request, mut response: Response| {
