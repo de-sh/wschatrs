@@ -4,9 +4,9 @@ use std::thread::spawn;
 use tungstenite::accept_hdr;
 use tungstenite::handshake::server::{Request, Response};
 
-pub fn server() {
+pub fn main() {
     env_logger::init();
-    let server = TcpListener::bind("127.0.0.1:3012").unwrap();
+    let server = TcpListener::bind("127.0.0.1:3012").expect("Can't connect");
     for stream in server.incoming() {
         spawn(move || {
             let callback = |req: &Request, mut response: Response| {
